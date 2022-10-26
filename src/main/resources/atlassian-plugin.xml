@@ -1,0 +1,68 @@
+<!--
+  #%L
+  jira-config-plugin
+  %%
+  Copyright (C) 2022 The Plugin Authors
+  %%
+  Licensed under the Apache License, Version 2.0 (the "License");
+  you may not use this file except in compliance with the License.
+  You may obtain a copy of the License at
+  
+       http://www.apache.org/licenses/LICENSE-2.0
+  
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+  #L%
+  -->
+<atlassian-plugin key="${atlassian.plugin.key}" name="${project.name}" plugins-version="2">
+    <plugin-info>
+        <description>${project.description}</description>
+        <version>${project.version}</version>
+        <vendor name="${project.organization.name}" url="${project.organization.url}" />
+    </plugin-info>
+
+    <resource type="i18n" name="i18n" location="i18n/plugin"/>
+
+    <!-- ##################################################### -->
+    <!-- WEB RESOURCES -->
+    <!-- ##################################################### -->
+    <web-resource key="frontend-utility">
+        <dependency>com.atlassian.auiplugin:ajs</dependency>
+        <resource type="download" name="frontend-utility.js" location="js/frontend-utility.js"/>
+        <resource type="download" name="frontend-utility.css" location="css/frontend-utility.css"/>
+        <context>atl.general</context>
+    </web-resource>
+
+    <resource type="download" name="js/" location="/js"/>
+
+    <!-- ##################################################### -->
+    <!-- TOP LEVEL APP MENU -->
+    <!-- ##################################################### -->
+    <web-item key="app-item" section="system.top.navigation.bar">
+        <label key="app-item.label"/>
+        <link linkId="app-dropdown"/>
+    </web-item>
+
+    <web-section key="app-section" location="app-dropdown"/>
+
+    <web-item key="module-item" section="app-dropdown/app-section">
+        <label key="module-item.label"/>
+        <link>/secure/ModuleAction!default.jspa</link>
+    </web-item>
+
+    <webwork1 key="app-action">
+        <actions>
+            <action name="com.linkedplanet.plugin.jira.configplugin.impl.action.ModuleAction"
+                    alias="ModuleAction">
+                <view name="input">/templates/action/module_jira.vm</view>
+                <view name="success">/templates/action/module_jira.vm</view>
+            </action>
+        </actions>
+    </webwork1>
+
+
+
+</atlassian-plugin>

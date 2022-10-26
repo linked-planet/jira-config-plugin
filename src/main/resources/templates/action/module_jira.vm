@@ -1,0 +1,27 @@
+#* @vtlvariable name="i18n" type="com.atlassian.jira.util.I18nHelper" *#
+
+#set($title = "$i18n.getText('module-item.label')")
+
+<html lang="en">
+<head>
+    <title>$title</title>
+    <meta name="decorator" content="atl.general"/>
+</head>
+
+<body class="app-body">
+
+<section id="app-jira-config" class="app-main" role="main">
+    <div class="util-align-loading-spinner">
+        <aui-spinner size="medium"></aui-spinner>
+    </div>
+</section>
+
+<script type="text/javascript">
+    initFrontendApp(function () {
+        var appContainer = document.getElementById('app-jira-config');
+        frontend.startJiraConfig(appContainer);
+    });
+</script>
+
+</body>
+</html>
